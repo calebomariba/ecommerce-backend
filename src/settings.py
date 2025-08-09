@@ -10,12 +10,12 @@ SECRET_KEY = config("DJANGO_SECRET_KEY")
 
 DEBUG = True
 
-ALLOWED_HOSTS = (
+ALLOWED_HOSTS = [
     "ecommercebackend-db131475f0b6.herokuapp.com",
-    ["127.0.0.1","0.0.0.0", "localhost"]
-    if PROJECT_ENVIRONMENT == "development"
-    else config("ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.split(",")])
-)
+    "127.0.0.1","0.0.0.0", "localhost",]
+#     if PROJECT_ENVIRONMENT == "development"
+#     else config("ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.split(",")])
+# )
 
 INSTALLED_APPS = [
     "django.contrib.admin",
