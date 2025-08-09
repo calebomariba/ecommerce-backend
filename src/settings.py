@@ -182,7 +182,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # if PROJECT_ENVIRONMENT != "production":
 STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "static"
+# STATIC_ROOT = BASE_DIR / "static"
 
 # Media files
 MEDIA_URL = "/media/"
