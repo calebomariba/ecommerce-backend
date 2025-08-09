@@ -10,7 +10,7 @@ function cleanup() {
 
 trap cleanup EXIT
 
-# Layered dependencies
+# Layered dependencies ok
 python -m piptools compile \
   --upgrade \
   --resolver backtracking \
