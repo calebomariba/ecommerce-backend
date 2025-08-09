@@ -43,7 +43,7 @@ djangorestframework==3.15.2
     #   eCommerce (pyproject.toml)
 djangorestframework-simplejwt==5.4.0
     # via eCommerce (pyproject.toml)
-gunicorn==23.1.0
+gunicorn
     # via eCommerce (pyproject.toml)
 idna==3.10
     # via requests
