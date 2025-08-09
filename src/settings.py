@@ -190,7 +190,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 
 # if PROJECT_ENVIRONMENT == "production":
-INSTALLED_APPS += ["storages"]
+# INSTALLED_APPS += ["storages"]
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
