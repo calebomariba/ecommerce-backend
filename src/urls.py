@@ -18,6 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from src.apps.products.api.views import index  # Import the index view
 from django.views.generic.base import TemplateView
 
 
@@ -25,7 +26,7 @@ API_PREFIX = "api"
 
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="base.html"), name="index"),
+    path("", index, name="index"),
     path("admin/", admin.site.urls),
     path(f"{API_PREFIX}/accounts/", include("src.apps.accounts.api.urls")),
     path(f"{API_PREFIX}/products/", include("src.apps.products.api.urls")),

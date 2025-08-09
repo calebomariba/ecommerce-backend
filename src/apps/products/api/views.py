@@ -1,10 +1,13 @@
 from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter, SearchFilter
-
+from django.shortcuts import render
 from ..models import Category, Product
 
 from .serializers import CategorySerializer, ProductSerializer
 
+
+def index(request):
+    return render(request, "test/base.html")
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
