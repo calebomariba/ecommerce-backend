@@ -4,9 +4,9 @@ from decouple import config
 
 BASE_DIR = Path(__file__).parents[1]
 
-PROJECT_ENVIRONMENT = config("PROJECT_ENVIRONMENT")
+# PROJECT_ENVIRONMENT = config("PROJECT_ENVIRONMENT")
 
-SECRET_KEY = config("DJANGO_SECRET_KEY")
+SECRET_KEY = "very secret key"
 
 DEBUG = True
 
@@ -77,17 +77,25 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "src.wsgi.application"
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": config("POSTGRES_DB"),
-        "USER": config("POSTGRES_USER"),
-        "PASSWORD": config("POSTGRES_PASSWORD"),
-        "HOST": config("POSTGRES_HOST"),
-        "PORT": config("POSTGRES_PORT"),
+if DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
-}
+else:
+
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": config("POSTGRES_DB"),
+            "USER": config("POSTGRES_USER"),
+            "PASSWORD": config("POSTGRES_PASSWORD"),
+            "HOST": config("POSTGRES_HOST"),
+            "PORT": config("POSTGRES_PORT"),
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -172,32 +180,32 @@ STRIPE_PUBLISHABLE_KEY = config("STRIPE_PUBLISHABLE_KEY")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-if PROJECT_ENVIRONMENT != "production":
-    STATIC_URL = "/static/"
-    STATIC_ROOT = BASE_DIR / "static"
+# if PROJECT_ENVIRONMENT != "production":
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "static"
 
-    # Media files
-    MEDIA_URL = "/media/"
-    MEDIA_ROOT = BASE_DIR / "media"
+# Media files
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 
-if PROJECT_ENVIRONMENT == "production":
-    INSTALLED_APPS += ["storages"]
+# if PROJECT_ENVIRONMENT == "production":
+INSTALLED_APPS += ["storages"]
 
-    STATICFILES_DIRS = [
-        BASE_DIR / "static",
-    ]
-    STATICFILES_STORAGE = "src.storage_backends.StaticStorage"
-    DEFAULT_FILE_STORAGE = "src.storage_backends.MediaStorage"
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+STATICFILES_STORAGE = "src.storage_backends.StaticStorage"
+DEFAULT_FILE_STORAGE = "src.storage_backends.MediaStorage"
 
-    AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
-    AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
-    AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")
-    AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
-    AWS_S3_OBJECT_PARAMETERS = {
-        "CacheControl": "max-age=86400",
-    }
-    AWS_PRELOAD_METADATA = True
-    STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"
-    ADMIN_MEDIA_PREFIX = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/admin/"
-    MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/media/"
+# AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
+# AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
+# AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")
+# AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
+# AWS_S3_OBJECT_PARAMETERS = {
+#     "CacheControl": "max-age=86400",
+# }
+# AWS_PRELOAD_METADATA = True
+# STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"
+# ADMIN_MEDIA_PREFIX = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/admin/"
+# MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/media/"
