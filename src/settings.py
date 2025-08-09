@@ -8,7 +8,7 @@ PROJECT_ENVIRONMENT = config("PROJECT_ENVIRONMENT")
 
 SECRET_KEY = config("DJANGO_SECRET_KEY")
 
-DEBUG = PROJECT_ENVIRONMENT == "development"
+DEBUG = True
 
 ALLOWED_HOSTS = (
     "ecommercebackend-db131475f0b6.herokuapp.com",
